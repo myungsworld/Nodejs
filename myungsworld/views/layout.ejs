@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+   <span>
+    <h1><a href='/'>명이의 세상</a></h1>
+      <nav id='select-bg'>
+        <ul>
+          <li class="menuLink">
+          <script>
+            var bodyStyle = document.querySelector('body').style;
+          </script>
+            <span value = '어둠의 다크니스!' onclick="
+              bodyStyle.backgroundColor='black';
+              bodyStyle.color='white';
+              ">어둠의 다크니스</span>
+          </li>
+          <li class="menuLink">    
+            <span value = '정열의 레드니스!' onclick="
+              bodyStyle.backgroundColor='red';
+              bodyStyle.color='powderblue';
+              ">정열의 레드니스</span>
+          </li>
+          <li class="menuLink">
+            <span  value = '빛의 화이니스!' onclick="
+              bodyStyle.backgroundColor='white';
+              bodyStyle.color='black';
+              ">빛의 화이니스</span>
+          </li>
+          <li class="menuLink">
+            <%- body %>
+            <span  value = '하늘의 스카이니스!' onclick="
+              bodyStyle.backgroundColor='skyblue';
+              bodyStyle.color='red';
+              ">바다의 블루니스</span>
+          </li>
+        </ul>
+      </nav>
+      </span>  
+    </body>
+</html>      

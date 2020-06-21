@@ -5,36 +5,42 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    
     <h1><a href='/'>명이의 세상</a></h1>
+     <header>
       <nav id='select-bg'>
         <ul>
           <li class="menuLink">
+          <script>
+            var bodyStyle = document.querySelector('body').style;
+          </script>
             <span value = '어둠의 다크니스!' onclick="
-              document.querySelector('body').style.backgroundColor='black';
-              document.querySelector('body').style.color='white';
+              bodyStyle.backgroundColor='black';
+              bodyStyle.color='white';
               ">어둠의 다크니스</span>
           </li>
           <li class="menuLink">    
             <span value = '정열의 레드니스!' onclick="
-              document.querySelector('body').style.backgroundColor='red';
-              document.querySelector('body').style.color='blue';
+              bodyStyle.backgroundColor='red';
+              bodyStyle.color='powderblue';
               ">정열의 레드니스</span>
           </li>
           <li class="menuLink">
             <span  value = '빛의 화이니스!' onclick="
-              document.querySelector('body').style.backgroundColor='white';
-              document.querySelector('body').style.color='black';
+              bodyStyle.backgroundColor='white';
+              bodyStyle.color='black';
               ">빛의 화이니스</span>
           </li>
           <li class="menuLink">
-            <span  value = '바다의 블루니스!' onclick="
-              document.querySelector('body').style.backgroundColor='skyblue';
-              document.querySelector('body').style.color='red';
+            <span  value = '하늘의 스카이니스!' onclick="
+              bodyStyle.backgroundColor='skyblue';
+              bodyStyle.color='red';
               ">바다의 블루니스</span>
           </li>
         </ul>
       </nav>      
-    </span>
+     </header> 
+    <br style='font-size : 15px; '>this description is only for description </br>
     <a class='btn' href='/users/maingame'>버튼 구현 우케했노?</a>
   </body>
 </html>

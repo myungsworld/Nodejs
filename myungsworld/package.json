@@ -1,5 +1,5 @@
 {
-  "name": "game",
+  "name": "myungsworld",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,10 @@
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "^2.6.2",
+    "ejs-locals": "^1.0.2",
     "express": "~4.16.1",
+    "express-ejs-layouts": "^2.5.0",
+    "forever-monitor": "^3.0.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "pm2": "^4.4.0"
