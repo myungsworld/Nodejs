@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
   <body>
    <span>
     <h1><a href='/'>명이의 세상</a></h1>
@@ -31,7 +28,7 @@
               ">빛의 화이니스</span>
           </li>
           <li class="menuLink">
-            <%- body %>
+            
             <span  value = '하늘의 스카이니스!' onclick="
               bodyStyle.backgroundColor='skyblue';
               bodyStyle.color='red';
@@ -40,5 +37,6 @@
         </ul>
       </nav>
       </span>  
+      <%- body %>
     </body>
 </html>      

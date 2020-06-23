@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
 var expressLayouts = require('express-ejs-layouts');
-
+var engine = require('ejs-locals');
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
@@ -21,7 +21,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 // /app.set('layout','layout');
 // app.set("layout extractScripts", true);
-
+app.engine('ejs', engine);
 app.use(expressLayouts);
 app.use(logger('dev'));
 app.use(express.json());
