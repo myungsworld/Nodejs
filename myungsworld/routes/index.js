@@ -5,6 +5,8 @@ var router = express.Router();
 var usersRouter = require('./users');
 router.use('/users',usersRouter);
 // ./ same folder path ../ previous folder path
+var whRouter = require('./wh');
+router.use('/wh',whRouter);
 
 /* GET home page. */
 router.get('/myungsworld', function(req, res, next) {
