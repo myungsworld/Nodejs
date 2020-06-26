@@ -10,7 +10,8 @@
 
 #select-bg{
   height: 30px;
-  width : 850px;
+  width : 1450px;
+  text-align: center;
 }
 
 #select-bg ul li {
@@ -42,6 +43,7 @@
 
 h1 {
   color: coral;
+  text-align: center; 
 }
 
 .btn {
