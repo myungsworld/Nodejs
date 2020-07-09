@@ -5,3 +5,6 @@ class Test {
 }
 
 new Test();
+
+let song ="song";
+song.toString();
