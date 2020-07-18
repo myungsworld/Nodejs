@@ -1,0 +1,20 @@
+{
+  "name": "study",
+  "version": "1.0.0",
+  "description": "study tutorials",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jade": "^1.11.0",
+    "prettier": "^2.0.5",
+    "pug": "^3.0.0",
+    "pug-cli": "^1.0.0-alpha6",
+    "sample": "0.0.2",
+    "underscore": "^1.10.2"
+  }
+}

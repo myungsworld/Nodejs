@@ -1,0 +1,53 @@
+/* body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: Helvetica Neue,-apple-system,BlinkMacSystemFont,SF Pro Text,Segoe UI,Fira Sans,Roboto,Oxygen,Ubuntu,Droid Sans,Arial,sans-serif;
+  font-weight: 400;
+  color: #000;
+  line-height: 1.5;
+} */
+
+#select-bg{
+  height: 30px;
+  width : 1450px;
+  text-align: center;
+}
+
+#select-bg ul li {
+  list-style : none; /* 목록앞에 오는 점같은거 없애줌 */
+  color : white; 
+  background-color: #332c26;
+  float:left;
+  line-height: 30px;
+  vertical-align:middle;
+  text-align: center; /* 글씨 가운데 정렬 */
+}
+
+#select-bg .menuLink {
+  
+  text-decoration: none; /* a 태그가 가지는 기본 꾸밈 효과 (밑줄) 없앰 */
+  /* color:white; */
+  display: black;
+  width : 150px;
+  font-size:12px;
+  font-weight: bold;
+  font-family: 'Trebuchet MS' , 'Dotum' , 'Arial';
+  cursor:pointer;
+}
+
+#select-bg .meunlink:hover {
+  color:red;
+  background-color: #4d4d4d;
+}
+
+h1 {
+  color: coral;
+  text-align: center; 
+}
+
+.btn {
+  cursor:pointer;
+  color: green;
+}
+
