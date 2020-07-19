@@ -9,21 +9,22 @@ app.set('views','./views')
 app.use(express.static('public'));
 
 //post 방식 쓸때 필요 npm install body-parser
+//미들웨어
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: false}))
 
 app.get('/form', (req,res) => {
     res.render('form')
 })
-
-app.get('/form_receiver', (req,res) =>{
+//이거든
+app.get('/form_receiver', (req,res) => {
     var title = req.query.title;
     var description = req.query.description;
     res.send(title+','+description)
 })
-
-app.post('/form_receiver', (req,res) =>{
-    
+//이거든 둘다 보안이 뛰어나진 않음 
+//대규모 전송방식에 유리함
+app.post('/form_receiver', (req,res) => {
     var title = req.body.title;
     var description =req.body.description;
     res.send(title+','+description)
@@ -51,7 +52,7 @@ app.get('/', (req,res) => {
     })
 })
 
-app.get('/login',(req,res) =>{
+app.get('/login',(req,res) => {
     res.send('<h1>login plz</h1>')
 })
 
@@ -91,7 +92,7 @@ app.get('/dynamic', function(req,res){
 })
 
 
-app.get('/a',(req,res) =>{
+app.get('/a',(req,res) => {
     res.send('/a로 옴')
 })
 //a를 포함하면 모든 페이지가 이쪽으로옴
