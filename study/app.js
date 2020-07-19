@@ -1,18 +1,45 @@
 const express = require('express')
 const fs = require('fs')
+
 const app = express();
+
 app.locals.pretty = true;
 app.set('view engine', 'pug');
 app.set('views','./views')
+app.use(express.static('public'));
 
-app.get('/topic', (req,res) => {
+//post 방식 쓸때 필요 npm install body-parser
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({extended: false}))
+
+app.get('/form', (req,res) => {
+    res.render('form')
+})
+
+app.get('/form_receiver', (req,res) =>{
+    var title = req.query.title;
+    var description = req.query.description;
+    res.send(title+','+description)
+})
+
+app.post('/form_receiver', (req,res) =>{
+    
+    var title = req.body.title;
+    var description =req.body.description;
+    res.send(title+','+description)
+})
+app.get('/topic/:id', (req,res) => {
     var topics = [
         'Javascript is ...',
         'Nodejs is...',
         'Express is...'
     ]
-    var output = topics[req.query.id]
-    res.render('topic', {topics : output})
+    var output = topics[req.params.id]
+    res.render('topic',{output:output})
+})
+
+app.get('/topic/:id/:mode', (req,res) => {
+    res.send(req.params.id+','+req.params.mode)
 })
 
 app.get('/', (req,res) => {
@@ -31,7 +58,7 @@ app.get('/login',(req,res) =>{
 
 //정적파일 디렉토리 public을 쓴다고 했으니 
 //그 안으로 들어가서 경로를 지정할 필요가 없음
-app.use(express.static('public'));
+
 
 app.get('/file',(req,res) => {
     res.send('<img src="/ddong/JS.png">')
