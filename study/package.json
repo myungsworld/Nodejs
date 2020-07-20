@@ -16,6 +16,7 @@
     "pug": "^3.0.0",
     "pug-cli": "^1.0.0-alpha6",
     "sample": "0.0.2",
+    "supervisor": "^0.12.0",
     "underscore": "^1.10.2"
   }
 }
