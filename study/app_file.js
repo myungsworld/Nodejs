@@ -70,8 +70,8 @@ app.post('/topic',(req,res) => {
             console.log(err)
             res.status(500).send('Internal Server Error')
         }
-    
         res.redirect('/topic/'+title)
+        
     })
 })
 
