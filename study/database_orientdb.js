@@ -1,17 +1,18 @@
-const orientDb = require("orientjs")
+const OrientDBClient = require("orientjs").OrientDBClient;
 
-var server = orientDb({
-    host: 'localhost',
-    port: '2424',
-    username:'root',
-    password: 'thdehdaud99'
-})
+OrientDBClient.connect({
+  host: "localhost",
+  port: 2424
+}).then(client => {
+  return client.close();
+}).then(()=> {
+   console.log("Client closed");
+});
 
-var db = server.use('o2');
-console.log('Using database +' + db.name);
-
-var sql = 'SELECT * FROM topic'
-
-db.query(sql,'#35:0').then(function (results){
-    console.log(reuslts);
-})
+client.session({ name: "demodb", username: "admin", password: "admin" })
+.then(session => {
+	// use the session
+	... 
+	// close the session
+	return session.close();
+});
