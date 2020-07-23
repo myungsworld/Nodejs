@@ -12,6 +12,8 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "jade": "^1.11.0",
+    "mysql2": "^2.1.0",
+    "node-mysql": "^0.4.2",
     "orientjs": "^3.0.11",
     "prettier": "^2.0.5",
     "pug": "^3.0.0",
