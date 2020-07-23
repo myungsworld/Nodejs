@@ -1,3 +1,6 @@
+## 더 이상 지원하지 않는 orientDB sql 형식
+
+``` javascript
 const orientDb = require("orientjs")
 
 var server = orientDb({
@@ -15,3 +18,6 @@ var sql = 'SELECT * FROM topic'
 db.query(sql,'#35:0').then(function (results){
     console.log(reuslts);
 })
+```
+
+ 
