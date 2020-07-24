@@ -24,11 +24,11 @@ conn.query(sql,(err ,rows, fields) => {
   }
 });
 */
-
+/*
 var sql = `INSERT INTO topic (title, description, author) 
            VALUES(?,?,?)`
-
 var params = ['Supervisor', 'Watcher', 'graphittie'];
+
 conn.query(sql, params, (err,rows,fields) => {
   if(err) {
     console.log(err);
@@ -36,5 +36,28 @@ conn.query(sql, params, (err,rows,fields) => {
     console.log(rows.insertId);
   }
 })
+*/
+/*
+var sql = `UPDATE topic SET title=?, author=? WHERE id=?`
+var params = ['NPM', 'leezche', 1];
 
+conn.query(sql, params, (err,rows,fields) => {
+  if(err) {
+    console.log(err);
+  } else {
+    console.log(rows);
+  }
+})
+*/
+
+var sql = `DELETE FROM topic WHERE id=?`
+var params = [1];
+
+conn.query(sql, params, (err,rows,fields) => {
+  if(err) {
+    console.log(err);
+  } else {
+    console.log(rows);
+  }
+})
 conn.end();
