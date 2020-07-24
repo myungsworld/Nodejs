@@ -12,7 +12,7 @@ OrientDBClient.connect({
 client.session({ name: "demodb", username: "admin", password: "admin" })
 .then(session => {
 	// use the session
-	... 
+	console.log('orientdb')
 	// close the session
 	return session.close();
 });
