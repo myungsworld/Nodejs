@@ -1,6 +1,5 @@
 var express = require('express')
 var app = express()
-var fs = require('fs')
 var bodyParser = require('body-parser')
 var port = 3000;
 //-----------DATABASE CONNECTION-------
@@ -134,10 +133,6 @@ app.get(['/topic', '/topic/:id'], (req,res) => {
         res.render('view', {topics:topics})
         }
     })
-})
-
-app.get('/' ,(req,res) => {
-    res.render('index')
 })
 
 app.listen(port , () => {
