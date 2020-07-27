@@ -12,4 +12,8 @@
 
 ## Cookie 
 
-[Express Cookie](http://expressjs.com/en/4x/api.html#req.cookies)
+[cookie-parser](https://www.npmjs.com/package/cookie-parser)
+
+## Session
+
+[Express seesion](https://www.npmjs.com/package/express-session)
