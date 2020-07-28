@@ -6,6 +6,10 @@
 
  A new body object containing the parsed data is populated on the request object after the middleware (i.e. req.body). This object will contain key-value pairs, where the value can be a string or array (when extended is false), or any type (when extended is true).
 
-## Node MySQL 2
+## MySQL2
 
 [node-mysql](https://github.com/sidorares/node-mysql2)
+
+## Cookie 
+
+[Express Cookie](http://expressjs.com/en/4x/api.html#req.cookies)
