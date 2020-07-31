@@ -35,7 +35,7 @@ app.get('/cart/:id/', (req,res) =>{
     }
     cart[id] = parseInt(cart[id]) + 1
     res.cookie('cart' , cart, {signed:true})
-    res.redirect('/cart')
+    res.redirect('/cart') 
 })
 app.get('/cart', (req,res) => {
     // 쿠키에 저장된 값 가져오는 것
