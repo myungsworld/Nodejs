@@ -103,36 +103,54 @@ app.get('/auth/register', (req,res) => {
     res.send(output)
 })
 
-
-app.post('/auth/login', (req,res) => {
-    var uname = req.body.username
-    var pwd = req.body.password
+passport.serializeUser(function(user, done) {
+    console.log('serializeUser', user)
+    done(null, user.username);
+});
+//이 콜백함수는 세션에 저장된 사람들 
+passport.deserializeUser(function(id, done) {
+    console.log('deserializeUser', id)
     for(var i=0; i<users.length; i++){
         var user = users[i]
-        if(uname === user.username) {
-            //콜백함수가 나중에 실행되는걸 방지하기 위함
-            return hasher({password:pwd, salt:user.salt}, (err,pass,salt,hash) => {
-                if(hash === user.password){
-                    req.session.displayName = user.displayName;
-                    req.session.save(function(){
-                        res.redirect('/welcome');
-                    })
-                } else {
-                    res.send(`<a href='/auth/login'>fuck off you motherfucker</a>`)
-                }
-            })
+        if(user.username === id){
+            return done(null, user)
         }
-    //    if(uname === user.username && sha256(user.salt+pwd) === user.password){
-    //         //로그인 성공하면, 밑 코드 실행, 그 세션 아이디에 displayName
-    //         //이라는 값으로 user의 displayName 을 저장함
-    //         //서버에 정보 저장
-    //          req.session.displayName = user.displayName
-    //         return req.session.save(function(){
-    //             res.redirect(`/welcome`)
-    //         })
-    //     } 
-    }    
-})
+    }
+});
+passport.use(new LocalStrategy(
+    function(username, password, done){
+        var uname = username
+        var pwd = password
+        for(var i=0; i<users.length; i++){
+            var user = users[i]
+            if(uname === user.username) {
+                //콜백함수가 나중에 실행되는걸 방지하기 위함
+                return hasher({password:pwd, salt:user.salt}, (err,pass,salt,hash) => {
+                    if(hash === user.password){
+                        console.log('LocalStrategy', user)
+                        done(null,user)
+                        //done에 user가 false가 아니라면 serializeUser 실행
+                    } else {
+                        done(null,false)
+                        //done이 false라면 deserializeUser 실행
+                    }
+                })
+            }
+        }  
+        done(null,false)  
+    }
+));
+app.post('/auth/login',
+    passport.authenticate(
+        // 저 로컬이라는 값에 의해 passport에 등록된 local객체 콜백함수 실행
+        'local', {
+        successRedirect: '/welcome',
+        failureRedirect: '/auth/login',
+        failureFlash: false 
+    }
+  )
+);
+
 
 app.get('/auth/login', (req,res) => {
     var output =`
