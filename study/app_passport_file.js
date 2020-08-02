@@ -31,14 +31,18 @@ app.get('/count', (req,res) => {
 })
 
 app.get('/auth/logout', (req,res) => {
-    delete req.session.displayName
-    res.redirect('/welcome');
+    req.logout()
+    // 아래 코드 대신 사용
+    //delete req.session.displayName
+    req.session.save(function(){
+        res.redirect('/welcome');
+    })
 })
 
 app.get('/welcome', (req,res) => {
-    if(req.session.displayName){
+    if(req.user && req.user.displayName){
         res.send(`
-            <h1>Hello, ${req.session.displayName} <h1>
+            <h1>Hello, ${req.user.displayName} <h1>
             <a href='/auth/logout'>Logout</a>
         `)        
     } else {
@@ -76,9 +80,11 @@ app.post('/auth/register', (req,res) => {
             displayName:req.body.displayName
         }
         users.push(user);
-        req.session.displayName = req.body.displayName
-        req.session.save(function(){
-            res.redirect('/welcome')
+        req.login(user, function(err){
+            req.session.save(function(){
+                res.redirect('/welcome')
+
+            })
         })
     })
 })
@@ -107,7 +113,7 @@ passport.serializeUser(function(user, done) {
     console.log('serializeUser', user)
     done(null, user.username);
 });
-//이 콜백함수는 세션에 저장된 사람들 
+//이 콜백함수는 세션에 저장된 정보들을 콜함
 passport.deserializeUser(function(id, done) {
     console.log('deserializeUser', id)
     for(var i=0; i<users.length; i++){
