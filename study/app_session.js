@@ -122,6 +122,7 @@ app.post('/auth/login', (req,res) => {
                 }
             })
         }
+    }    
     //    if(uname === user.username && sha256(user.salt+pwd) === user.password){
     //         //로그인 성공하면, 밑 코드 실행, 그 세션 아이디에 displayName
     //         //이라는 값으로 user의 displayName 을 저장함
@@ -131,7 +132,6 @@ app.post('/auth/login', (req,res) => {
     //             res.redirect(`/welcome`)
     //         })
     //     } 
-    }    
 })
 
 app.get('/auth/login', (req,res) => {
