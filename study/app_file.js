@@ -13,34 +13,54 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static('public_file'));
 
 app.get('/topic/new', (req,res) => {
-    res.render('new')
+    fs.readdir('data', (err,files) => {
+        if(err){
+            console.log(err);
+            res.status(500).send("Internal Server Error")
+        }
+        res.render('new',{topics:files})
+    })
+    
 })
 
-app.get('/topic', (req,res) => {
-    fs.readdir('data',(err,files) => {
+app.get(['/topic', '/topic/:id'], (req,res) => {
+    fs.readdir('data', (err,files) => {
         if(err){
             console.log(err);
             res.status(500).send("Internal Server Error")
         }
-        res.render('view', {topics:files})
+    var id = req.params.id
+    if(id){
+        //id 값이 있을 때 
+        fs.readFile('data/'+id, 'utf8', (err,data) => {
+        if(err) {
+            console.log(err);
+            res.status(500).send("Internal Server Error")
+        }
+        res.render('view',{topics:files, title:id , description : data});
+      })
+    } else {
+        // id 값이 없을 떄
+        res.render('view', {topics:files, title:'Welcome', description:'Hello, Javascript for server.'})
+    }
     })
 })
-app.get('/topic/:id', (req,res) => {
-    var id = req.params.id;
-    fs.readdir('data',(err,files) => {
-        if(err){
-            console.log(err);
-            res.status(500).send("Internal Server Error")
-        }
-        fs.readFile('data/'+id, 'utf8', (err,data) => {
-            if(err) {
-                console.log(err);
-                res.status(500).send("Internal Server Error")
-            }
-            res.render('view',{topics:files, title:id , description : data});
-        })
-    }) 
-})
+// app.get('/topic/:id', (req,res) => {
+//     var id = req.params.id;
+//     fs.readdir('data',(err,files) => {
+//         if(err){
+//             console.log(err);
+//             res.status(500).send("Internal Server Error")
+//         }
+//         fs.readFile('data/'+id, 'utf8', (err,data) => {
+//             if(err) {
+//                 console.log(err);
+//                 res.status(500).send("Internal Server Error")
+//             }
+//             res.render('view',{topics:files, title:id , description : data});
+//         })
+//     }) 
+// })
 
 app.post('/topic',(req,res) => {
     var title = req.body.title
@@ -50,7 +70,8 @@ app.post('/topic',(req,res) => {
             console.log(err)
             res.status(500).send('Internal Server Error')
         }
-        res.send('Success!')
+    
+        res.redirect('/topic/'+title)
     })
 })
 
