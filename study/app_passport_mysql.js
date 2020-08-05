@@ -7,7 +7,7 @@ var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
-const e = require('express');
+var router = express.Router();
 var hasher = bkfd2Password();
 //-----------DATABASE CONNECTION-------
 var mysql = require('mysql2');
@@ -38,6 +38,9 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.set('views', './views/mysql')
+app.set('view engine','pug')
 
 app.get('/count', (req,res) => {
     if(req.session.count){
@@ -75,7 +78,6 @@ app.get('/welcome', (req,res) => {
 
 })
 
-
 app.post('/auth/register', (req,res) => {
     hasher({password:req.body.password},function(err,pass,salt,hash){
         var user = {
@@ -91,7 +93,6 @@ app.post('/auth/register', (req,res) => {
                 console.log(err)
                 res.status(500);
             } else {
-                res.redirect('/welcome')
                 req.login(user, (err) => {
                     req.session.save(function(){
                         res.redirect('/welcome')
@@ -99,32 +100,7 @@ app.post('/auth/register', (req,res) => {
                 })
             }
         })
-        // req.login(user, function(err){
-        //     req.session.save(function(){
-        //         res.redirect('/welcome')
-        //     })
-        // })
     })
-})
-
-app.get('/auth/register', (req,res) => {
-    var output = `
-    <h1>Register</h1>
-    <form action='/auth/register' method ='post'>
-        <p>
-            <input type = 'text' name ='username' placeholder='username'>
-        </p>
-        <p>
-            <input type="password" name="password" placeholder="password">
-        </p>
-        <p>
-            <input type='text' name='displayName' placeholder="displayName">
-        </p>
-        <p>
-            <input type='submit'>
-    </form>     
-    `
-    res.send(output)
 })
 
 passport.serializeUser(function(user, done) {
@@ -170,17 +146,6 @@ passport.use(new LocalStrategy(
         }) 
     }
 ));
-    
-app.post('/auth/login',
-    passport.authenticate(
-        // 저 로컬이라는 값에 의해 passport에 등록된 local객체 콜백함수 실행
-        'local', {
-        successRedirect: '/welcome',
-        failureRedirect: '/auth/login',
-        failureFlash: false 
-    }
-  )
-);
 
 passport.use(new FacebookStrategy({
     clientID: '704951060361842',
@@ -218,40 +183,9 @@ passport.use(new FacebookStrategy({
 ));
 
 
-app.get('/auth/facebook',
-    passport.authenticate('facebook',
-        { scope: 'email' })
-);
+var auth = require('./routes/mysql/auth')(passport)
+app.use('/auth', auth)
 
-app.get('/auth/facebook/callback',
-    passport.authenticate(
-        'facebook',{ 
-            successRedirect: '/welcome',
-            failureRedirect: '/auth/login' 
-        }
-    )
-);
-
-
-app.get('/auth/login', (req,res) => {
-    var output =`
-    <h1>Login</h1>
-        <form action='/auth/login' method='post'>
-            <p>
-                <input type="text" name="username" placeholder="username">
-            </p>
-            <p>
-                <input type="password" name="password" placeholder="password">
-            </p>
-            <p>
-                <input type="submit">
-            </p>
-
-        </form>
-        <a href="/auth/facebook">facebook</a>
-    `;
-    res.send(output)
-})
 app.listen(3003, ()=> {
     console.log('localhost:3003 is connected')
 })
