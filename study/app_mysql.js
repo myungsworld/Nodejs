@@ -130,7 +130,7 @@ app.get(['/topic', '/topic/:id'], (req,res) => {
                 }
             })
         } else {
-        res.render('view', {topics:topics})
+        res.render('/topic/view', {topics:topics})
         }
     })
 })

@@ -2,8 +2,8 @@ module.exports = (app) => {
     var bkfd2Password = require("pbkdf2-password");
     var passport = require('passport')
     var FacebookStrategy = require('passport-facebook').Strategy;
-    var LocalStrategy = require('passport-local').Strategy;
     var hasher = bkfd2Password();
+    var LocalStrategy = require('passport-local').Strategy;
     var conn = require('./db')()
     app.use(passport.initialize())
     app.use(passport.session())
