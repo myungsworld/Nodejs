@@ -1,0 +1,3 @@
+[submodule "KNUP"]
+	path = KNUP
+	url = https://github.com/byun618/KNUP.git
