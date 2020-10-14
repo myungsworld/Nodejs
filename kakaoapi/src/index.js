@@ -51,7 +51,32 @@ app.get("/auth/callback", async (req,res) => {
 
 })
 
+//카카오 페이
+app.post("/auth/callback", async (req,res) => {
+    const {ADMIN_KEY : adminkey} = process.env;
 
+    const options = {
+        uri: "https://kapi.kakao.com/v1/payment/ready",
+        method : "POST",
+        form : {
+            cid : "TC0ONETIME",
+            partner_order_id : "partner_order_id",
+            partner_user_id : "partner_user_id" ,
+            item_name: "초코파이" ,
+            quantity: "1" ,
+            total_amount: "2200" ,
+            vat_amount: "200" ,
+            tax_free_amount: "0" ,
+            approval_url : "https://developers.kakao.com/success",
+            fail_url : "https://developers.kakao.com/fail",
+            cancel_url : "https://developers.kakao.com/cancel"
+        },
+        headers: {
+            "content-type" : "application/x-www-form-urlencoded;charset=utf-8"
+        },
+        json: true
+    }
+})
 
 
 http.listen(port, () => {

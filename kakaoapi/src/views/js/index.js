@@ -3,3 +3,6 @@ function kakao_login(apiLink) {
 };
 
 
+function kakao_pay(apiLink) {
+    window.open(apiLink, "kakao");
+}
