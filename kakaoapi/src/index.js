@@ -44,7 +44,7 @@ app.get("/auth/callback", async (req,res) => {
     const cb = await rp(options);
     
     if (cb["access_token"]) {
-        res.render("callback", { result : 0 });
+        res.render("home", { result : 0 });
     } else {
         res.render("callback", { result : 1 });
     }
