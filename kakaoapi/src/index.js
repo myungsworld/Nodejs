@@ -52,7 +52,7 @@ app.get("/auth/callback", async (req,res) => {
 })
 
 //카카오 페이
-app.post("/auth/callback", async (req,res) => {
+app.post("/kakao/pay", async (req,res) => {
     const {ADMIN_KEY : adminkey} = process.env;
 
     const options = {
@@ -72,10 +72,24 @@ app.post("/auth/callback", async (req,res) => {
             cancel_url : "https://developers.kakao.com/cancel"
         },
         headers: {
-            "content-type" : "application/x-www-form-urlencoded;charset=utf-8"
+            "content-type" : "application/x-www-form-urlencoded;charset=utf-8",
+            "Authorization" : `KakaoAK ${adminkey}`
         },
         json: true
     }
+
+    function callback(error, response, body) {
+        if(!error && response.statusCode == 200) {
+            console.log(body);
+        }
+        
+    }
+
+    request.post(options, callback) 
+
+
+    res.render('kakaopay')
+    
 })
 
 
