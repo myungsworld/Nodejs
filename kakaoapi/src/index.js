@@ -13,6 +13,8 @@ const {
 app.use(express.static(__dirname + "/views"));
 app.set("view engine", "pug");
 
+app.use('/kakao', require('./kakao'))
+
 app.get("/", (req,res) => {
     
     const { KAKAO_KEY } = process.env;
@@ -96,3 +98,5 @@ app.post("/kakao/pay", async (req,res) => {
 http.listen(port, () => {
     console.log(`http://localhost:${port}`);
 })
+
+module.exports = app; 
