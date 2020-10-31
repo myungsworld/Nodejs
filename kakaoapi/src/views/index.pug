@@ -19,4 +19,11 @@ html(lang="en")
         div 카카오페이 테스트 페이지
         form(action="/kakao/pay" method="POST")
             a(href=payLink) 카카오페이
-            
+        
+        div 세션 테스트
+        form(action='/session' method ="POST")
+          p  
+            input(type="text" name="id")
+          p
+            input(type="text" name="pw")
+            button  세션

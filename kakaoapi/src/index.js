@@ -4,6 +4,11 @@ const http = require("http").createServer(app);
 const path = require("path");
 const request = require("request");
 const rp = require("request-promise")
+const session = require("express-session")
+const bodyParser = require("body-parser")
+
+app.use(bodyParser.urlencoded({extended: false}))
+
 require('dotenv').config({ path: path.join(__dirname, '/.env') });
 
 const {
@@ -12,14 +17,26 @@ const {
 
 app.use(express.static(__dirname + "/views"));
 app.set("view engine", "pug");
-
+app.use(session({
+    secret : 'kakaoapi',
+    resave : false,
+    saveUninitialized: true,
+}))
 app.use('/kakao', require('./kakao'))
 
 app.get("/", (req,res) => {
     
     const { KAKAO_KEY } = process.env;
+    
+    
     res.render("index", {apikey : KAKAO_KEY})
     
+})
+
+app.post("/session", (req,res) => {
+    sess = req.session
+
+    console.log(sess)
 })
 
 app.get("/auth/callback", async (req,res) => {
