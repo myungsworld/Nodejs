@@ -1,16 +1,18 @@
 version: "3"
 services: 
     app: 
-        buld:
+        build:
             context: .
             dockerfile: Dockerfile
         container_name: template
 
+        ports:
+            - "5000:3000"    
+        environment: 
+            - CONNECTION_PORT= "${PORT}"
+            - CONNECTION_HOST= "${HOST}"
         volumes:
             - ./:/app
-        ports:
-            - "5000:3000"
-
         depends_on:
             - mysql
         command:
@@ -27,6 +29,8 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: "template"
             MYSQL_DATABASE: "template"
+        cap_add:
+            - SYS_NICE  
         command: 
             - --character-set-server=utf8mb4
             - --collation-server=utf8mb4_unicode_ci

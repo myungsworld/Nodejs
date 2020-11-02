@@ -1,9 +1,9 @@
 {
     "development": {
-        "username" : "template",
+        "username" : "root",
         "password" : "template",
         "database" : "template",
-        "host" : "localhost",
+        "host" : "mysql",
         "dialect" : "mysql"
         
     }
